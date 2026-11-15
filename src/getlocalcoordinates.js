@@ -1,18 +1,12 @@
 export class getMandalaHelpers {
 
   static getLocalCoordinates = (ev, chartRef) => {
-    if (ev.type.includes("touch")) {
-      // this was the last step in getting mobile working.  Without referring to touch, the coordinates are off the page.
-      var touch = ev.touches[0] || ev.changedTouches[0]
-      var realTarget = document.elementFromPoint(touch.clientX, touch.clientY)      
-      ev.offsetX = touch.clientX - realTarget.getBoundingClientRect().x
-      ev.offsetY = touch.clientY - realTarget.getBoundingClientRect().y
-      const rect = chartRef.current.getBoundingClientRect()
-      return [touch.clientX - rect.left + 0.5, touch.clientY - rect.top + 0.5]
-    }
-    // mouse/desktop is comparatively simpler.
     const rect = chartRef.current.getBoundingClientRect()
-    return [ev.clientX - rect.left + 0.5, ev.clientY - rect.top + 0.5]
+    const pointer = ev.type.includes('touch') ? ev.touches[0] || ev.changedTouches[0] : ev
+    const canvas = chartRef.current.querySelector?.('#drawcanvas')
+    const scaleX = rect.width && canvas ? canvas.width / rect.width : 1
+    const scaleY = rect.height && canvas ? canvas.height / rect.height : 1
+    return [(pointer.clientX - rect.left + 0.5) * scaleX, (pointer.clientY - rect.top + 0.5) * scaleY]
   }
 
   static getSymmetryPoints = (x, y, width, slider1, extraMirror=true, gridPull=false) => {

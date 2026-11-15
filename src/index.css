@@ -1,39 +1,19 @@
-html, body, #root, .wrapper {
-  background-color: #242424;  
-  max-width: 100%;
-  padding: 0;
-  margin: 0;
+:root {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #283c34;
+  background: #f7f7f2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (min-width: 1201px) {
-  #app {
-    margin: auto auto;
-  }
-  html, body, #root, .wrapper {
-    width: 100%;
-  }
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  color: #ffffff !important;
-}
-
-h2 {
-  color: #ffffff !important;
-}
-
-h3 {
-  color: #ffffff !important;
-}
-
-.carousel-caption {
-  color: #ffffff !important;
-}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: #f7f7f2; color: #283c34; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; opacity: .35; }
+button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #b99a61; outline-offset: 4px; }
+::selection { background: #dce4d2; color: #244c46; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }

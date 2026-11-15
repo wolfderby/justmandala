@@ -5,7 +5,11 @@ Like the other project, makes Mandalas using symmetry.
 
 Also has a color chooser, a color importer from the image of your choosing, a random mandala maker, and an auto fill system
 
-Uses React and Bootstrap
+The studio starts with a generated mandala. Choose Lotus, Rosette, or Geometric patterns, try the Botanical, Terracotta, Indigo, or Rosewood palettes, and adjust the symmetry. Generate a new variation, or switch to line art to color it yourself.
+
+Drawing, fill, color picking, and zoom tools sit above the artwork. Open **Add your own touch** for brush size, custom colors, palette import, and automatic filling. **A fresh start** contains the blank canvas, PNG import, and tessellation tools. Downloads save the complete artwork at 1200 × 1200 pixels, including when the view is zoomed in.
+
+Uses React and a responsive canvas studio. Generated pattern settings, palettes, and seeds are stored in the URL; save a PNG to preserve hand-drawn edits.
 
 setup with node/npm,
 

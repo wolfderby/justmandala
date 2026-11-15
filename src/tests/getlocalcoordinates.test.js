@@ -26,13 +26,7 @@ describe("getLocalCoordinates", () => {
     expect(result).toEqual([50 + 0.5, 50 + 0.5]); // (150-100, 250-200)
   });
 
-  test("handles touch events by computing offsetX/Y", () => {
-    // mock elementFromPoint
-    const fakeTarget = document.createElement("div");
-    fakeTarget.getBoundingClientRect = () => ({ x: 10, y: 20 });
-
-    document.elementFromPoint = jest.fn(() => fakeTarget);
-
+  test("handles touch events relative to the drawing surface", () => {
     const touch = { clientX: 200, clientY: 300 };
     const ev = {
       type: "touchstart",
@@ -44,10 +38,23 @@ describe("getLocalCoordinates", () => {
 
     const result = getMandalaHelpers.getLocalCoordinates(ev, chartRef);
 
-    expect(ev.offsetX).toBe(200 - 10);
-    expect(ev.offsetY).toBe(300 - 20);
     expect(result).toEqual([100 + 0.5, 100 + 0.5]); // (200-100, 300-200)
   });
+
+  test('maps a responsive display to full-resolution canvas pixels', () => {
+    const canvas = document.createElement('canvas')
+    canvas.id = 'drawcanvas'
+    canvas.width = 1200
+    canvas.height = 1200
+    chartRef.current.appendChild(canvas)
+    const result = getMandalaHelpers.getLocalCoordinates({type: 'mousemove', clientX: 249.5, clientY: 349.5}, chartRef)
+    expect(result).toEqual([600, 600])
+  })
+
+  test('maps the final touch when the finger has left the screen', () => {
+    const event = {type: 'touchend', touches: [], changedTouches: [{clientX: 199.5, clientY: 299.5}]}
+    expect(getMandalaHelpers.getLocalCoordinates(event, chartRef)).toEqual([100, 100])
+  })
 });
 
 describe("getSymmetryPoints", () => {

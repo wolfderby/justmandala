@@ -1,6 +1,7 @@
-export function downloadMandala(canvasPass) {
+export function downloadMandala(canvasPass, suggestedName) {
   const canvas = canvasPass?.current
-  let fileName = prompt("Enter name to save image as:", "mandala.png")
+  if (!canvas) return
+  let fileName = suggestedName || prompt("Enter name to save image as:", "mandala.png")
   if (fileName) {
     fileName = fileName.replace(/[\/\\:*?"<>|]/g, "_")
     canvas.toBlob((blob) => {

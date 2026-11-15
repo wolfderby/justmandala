@@ -1,4 +1,5 @@
 import { getMandalaHelpers } from './getlocalcoordinates.js'
+import { parsePalette } from './palettes'
 
 export class autoFill {
   static getFillableAreas = (width, slider1, bgdata, fillableAreas, radioValue) => {
@@ -78,7 +79,7 @@ export class autoFill {
     const img = ctx.getImageData(0, 0, width, width)
     const bgdata = img.data
     // all this is necessary to turn this into an array of hex sequences
-    const palArr = decodeURIComponent(myPalette).replace("[", "").replace("]", "").replaceAll(`"`, "").split(",")
+    const palArr = parsePalette(myPalette)
     this.getFillableAreas(width, slider1, bgdata, fillableAreas, radioValue)
     // then step through fillable areas
     const img2 = ctx.getImageData(0, 0, width, width)

@@ -98,7 +98,7 @@ describe('MandalaControls', () => {
   it('calls randomDraw when Random Mandala button is clicked', () => {
     render(<MandalaControls {...defaultProps} />);
 
-    fireEvent.click(screen.getByText(/Random Mandala/i));
+    fireEvent.click(screen.getByRole('button', { name: /Generate mandala/i }));
     expect(randomDrawWrap).toHaveBeenCalledWith(
       defaultProps.width,
       defaultProps.slider1,
@@ -130,11 +130,11 @@ describe('MandalaControls', () => {
     );
   });
 
-  it('calls handleRadioChange when a toggle button is selected', () => {
+  it('calls handleRadioChange when a fill behavior is selected', () => {
     render(<MandalaControls {...defaultProps} />);
 
-    fireEvent.click(screen.getByText(/Color One/i));
-    expect(defaultProps.handleRadioChange).toHaveBeenCalled();
+    fireEvent.change(screen.getByLabelText(/Fill behavior/i), { target: { value: 'fillOne' } });
+    expect(defaultProps.handleRadioChange).toHaveBeenCalledWith('fillOne');
   });
 
   it('calls MandalaLib.handleFileInput when ColorChooser triggers file input', () => {

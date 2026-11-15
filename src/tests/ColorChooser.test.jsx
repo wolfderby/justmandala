@@ -138,14 +138,10 @@ describe('ColorChooser', () => {
 
     expect(mockHandleFileInput).toHaveBeenCalled()
   })
-  test('lime highlight', () => {
-    const { rerender } = render(<ColorChooser {...defaultProps} />)
-
-    rerender(<ColorChooser {...defaultProps} myLightDark={0} />)
-
-    // The first color button is selected by default (index 0)   
-    const selectedButton = screen.getAllByRole('button')[0]
-    expect(selectedButton).toHaveStyle('border: 6px solid lime')
+  test('exposes the selected color to assistive technology', () => {
+    render(<ColorChooser {...defaultProps} />)
+    expect(screen.getByRole('button', {name: 'Select color 1: #68840D'})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', {name: 'Select color 2: #4BB329'})).toHaveAttribute('aria-pressed', 'false')
   })
 
 })

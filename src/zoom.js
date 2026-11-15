@@ -6,7 +6,7 @@ import { randomDraw } from './randomdraw'
 import {autoFill} from './autoFill'
 
 export function zoom(event, isZoomRef, canvasRef, chartRef, zoomCanvasRef, width, quxRef, quyRef, symmetrySlider) {
-  if (event.type == "touchmove" || event.type == "click") {
+  if (event.type === 'touchend' || event.type === 'click') {
     var coord = getMandalaHelpers.getLocalCoordinates(event, chartRef)
     if (isZoomRef.current) {
         quxRef.current = 0
